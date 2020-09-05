@@ -3,7 +3,7 @@ Aplicação web de um blog feito com o framework Django
 
 # Dependências
 - python - Versão 3.5+
-- Django==2.1.1
+- Django==2.1.5
 
 # Instalação
 1. Crie um ambiente virtual:
