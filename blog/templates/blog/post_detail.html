@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ object.titulo }}{% endblock title %}
+{% block title %}{{ post.titulo }}{% endblock title %}
 
 {% block content %}
     <div class="post-entry">
-        <h2>{{ object.titulo }}</h2>
-        <p>{{ object.conteudo }}</p>
+        <h2>{{ post.titulo }}</h2>
+        <p>{{ post.conteudo }}</p>
     </div>
     <a href="{{ post.get_absolute_url_edit }}">Editar postagem</a>
+    <br/>
+    <a href="{{ post.get_absolute_url_delete }}">Deletar postagem</a>
 {% endblock content %}
