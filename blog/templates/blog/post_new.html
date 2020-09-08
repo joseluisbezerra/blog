@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 
 {% block title %}Nova postagem{% endblock title %}
 
 {% block content %}
-    <h1>Nova postagem</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Salvar">
-    </form>
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <h2 class="title mb-3">Nova postagem</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form|bootstrap }}
+            <input type="submit" value="Salvar" class="btn btn-primary">
+        </form>
+    </div>
 {% endblock content %}

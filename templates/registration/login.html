@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 
 {% block title %}Login{% endblock title %}
 
 {% block content %}
-    <h2>Login do sistema</h2>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <h2 class="title mb-3">Login do sistema</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form|bootstrap }}
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
 {% endblock content %}
