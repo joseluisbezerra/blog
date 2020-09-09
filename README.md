@@ -6,6 +6,7 @@ Aplicação web de um blog feito com o framework Django
 - Django==2.1.5
 - django-bootstrap-form==3.4
 - Pillow==7.2.0
+- django-ckeditor==6.0.0
 
 # Instalação
 1. Crie um ambiente virtual:

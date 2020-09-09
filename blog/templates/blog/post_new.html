@@ -4,12 +4,10 @@
 {% block title %}Nova postagem{% endblock title %}
 
 {% block content %}
-    <div class="col-lg-8 col-md-10 mx-auto">
-        <h2 class="title mb-3">Nova postagem</h2>
-        <form action="" method="POST">
-            {% csrf_token %}
-            {{ form|bootstrap }}
-            <input type="submit" value="Salvar" class="btn btn-primary">
-        </form>
-    </div>
+    <h2 class="title mb-3">Nova postagem</h2>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <input type="submit" value="Salvar" class="btn btn-primary">
+    </form>
 {% endblock content %}

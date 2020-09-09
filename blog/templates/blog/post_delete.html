@@ -3,12 +3,10 @@
 {% block title %}Deletar postagem{% endblock title %}
 
 {% block content %}
-    <div class="col-lg-8 col-md-10 mx-auto">
-        <h2 class="title mb-3">Deletar postagem</h2>
-        <form action="" method="POST">
-            {% csrf_token %}
-            <p>Você tem certeza que deseja excluir o registro "{{ post.titulo }}"?</p>
-            <input type="submit" value="Confirmar" class="btn btn-danger">
-        </form>
-    </div>
+    <h2 class="title mb-3">Deletar postagem</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <p>Você tem certeza que deseja excluir o registro "{{ post.titulo }}"?</p>
+        <input type="submit" value="Confirmar" class="btn btn-danger">
+    </form>
 {% endblock content %}

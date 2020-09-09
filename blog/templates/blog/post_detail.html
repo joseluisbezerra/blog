@@ -3,18 +3,13 @@
 {% block title %}{{ post.titulo }}{% endblock title %}
 
 {% block content %}
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
     <div class="post-entry">
-        <h2>{{ post.titulo }}</h2>
-        <p>{{ post.conteudo }}</p>
+        <h2 class="">{{ post.titulo }}</h2>
+        <p class="text-justify text-center">{{ post.conteudo|safe }}</p>
     </div>
-    <a href="{{ post.get_absolute_url_edit }}">Editar postagem</a>
-    <br/>
-    <a href="{{ post.get_absolute_url_delete }}">Deletar postagem</a>
+    <div class="text-center">
+        <a href="{{ post.get_absolute_url_edit }}" class="btn btn-info mb-2">Editar postagem</a>
+        <a href="{{ post.get_absolute_url_delete }}" class="btn btn-danger mb-2">Deletar postagem</a>
+    </div>
+        
 {% endblock content %}

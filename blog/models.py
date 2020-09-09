@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from ckeditor.fields import RichTextField
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -36,7 +37,7 @@ class Post(models.Model):
 
     categoria = models.ManyToManyField(Category, related_name='get_posts')
     imagem = models.ImageField(upload_to='blog', blank=True, null=True)
-    conteudo = models.TextField(verbose_name='Conteúdo')
+    conteudo = RichTextField(verbose_name='Conteúdo')
     publicado = models.DateTimeField(default=timezone.now)
     criado = models.DateTimeField(auto_now_add=True)
     alterado = models.DateTimeField(auto_now=True)
