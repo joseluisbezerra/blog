@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
+
+{% block title %}Contato{% endblock title %}
+
+{% block bannerurl %}{% static 'img/contact-bg.jpg' %}{% endblock bannerurl %}
+
+{% block site-heading %}
+    <div class="site-heading">
+        <h1>Contate-me</h1>
+        <span class="subheading">Tem alguma dúvida? Entre em contato comigo!</span>
+    </div>
+{% endblock site-heading %}
+
+{% block content %}
+
+    <p>Quer entrar em contato? Preencha o formulário abaixo para me enviar uma mensagem e entrarei em contato com você o mais breve possível!</p>
+    <form method="POST" id="contactForm" action="{% url 'contact' %}">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        
+        <br>
+
+        {% if success %}
+            <div class="text-center"><span>Email enviado com sucesso, obrigado por ter entrado em contato!</span></div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary btn-block" id="sendMessageButton">Enviar</button>
+    </form>
+    
+{% endblock content %}

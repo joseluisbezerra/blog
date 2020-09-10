@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'blog',
     'accounts',
+    'contact',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,9 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/static/'
+
+# Email
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '9cceb28b949746'
+EMAIL_HOST_PASSWORD = 'ac975b4f986ea9'
+EMAIL_PORT = '2525'
