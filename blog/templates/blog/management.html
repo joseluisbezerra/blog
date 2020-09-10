@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}Gestão{% endblock title %}
 
 {% block bannerurl %}{% static 'img/home-bg.jpg' %}{% endblock bannerurl %}
 
 {% block site-heading %}
     <div class="site-heading">
-        <h1>Clean Blog</h1>
-        <span class="subheading">A Blog Theme by Start Bootstrap</span>
+        <h1>Gerenciamento das postagens</h1>
     </div>
 {% endblock site-heading %}
 
@@ -21,21 +20,32 @@
             {% endfor %}
         </div>
     {% endif %}
+    
 
-    {% for post in object_list %}
-        <div class="post-preview">
-            <a href="{{ post.get_absolute_url }}">
-                <h2 class="post-title">
-                    {{ post.titulo }}
-                </h2>
-                <h6 class="post-subtitle">
-                    {{ post.conteudo|safe|truncatechars:"200" }}
-                </h6>
-            </a>
-            <p class="post-meta">Postado por <strong style="color: black;">{{ post.autor.first_name }} {{ post.autor.last_name }}</strong> em {{ post.publicado }}</p>
-        </div>
-        <hr>
-    {% endfor %}
+    <table class="table table-responsive">
+        <thead class="thead-dark">
+            <tr>
+              <th scope="col">Titulo</th>
+              <th scope="col">Autor</th>
+              <th scope="col">Publicado</th>
+              <th scope="col">Status</th>
+              <th scope="col">Atualizar</th>
+              <th scope="col">Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in object_list %}
+                <tr>
+                    <td scope="row">{{ post.titulo }}</td>
+                    <td>{{ post.autor }}</td>
+                    <td>{{ post.publicado }}</td>
+                    <td>{{ post.status }}</td>
+                    <td><a href="{{ post.get_absolute_url_edit }}" class="btn btn-primary btn-sm">Atualizar</a></td>
+                    <td><a href="{{ post.get_absolute_url_delete }}" class="btn btn-danger btn-sm">Deletar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
     <!-- Pager -->
     {% if page_obj.paginator.num_pages %}

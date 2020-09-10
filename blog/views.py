@@ -10,9 +10,15 @@ from django.shortcuts import render
 from .models import Post
 from .forms import PostForm
 
+class Management(LoginRequiredMixin, ListView):
+    paginate_by = 8
+    model = Post
+    template_name = 'blog/management.html'
+
 class BlogListView(ListView):
     paginate_by = 4
     model = Post
+    queryset = Post.objects.filter(status='publicado')
     template_name = 'blog/home.html'
 
 class BlogDetailView(DetailView):
@@ -60,5 +66,5 @@ class BlogDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         messages.success(self.request, self.success_message)
         return super(BlogDeleteView,self).delete(request, *args, **kwargs)
 
-def sobre(request):
-    return render(request, 'blog/sobre.html', {})
+def about(request):
+    return render(request, 'blog/about.html', {})
