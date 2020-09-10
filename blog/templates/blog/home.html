@@ -38,7 +38,29 @@
     {% endfor %}
 
     <!-- Pager -->
+    {% if page_obj.paginator.num_pages %}
     <div class="clearfix">
-        <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        <div class="row text-center">
+            <div class="col-sm">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}">< Anterior</a>
+                {% endif %}
+            </div>
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <span class="current">
+                    {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+                </span>
+            </div>
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                {% if page_obj.has_next %}
+                    <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">Próxima ></a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        
     </div>
+
 {% endblock content %}

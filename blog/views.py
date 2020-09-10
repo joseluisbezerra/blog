@@ -11,6 +11,7 @@ from .models import Post
 from .forms import PostForm
 
 class BlogListView(ListView):
+    paginate_by = 4
     model = Post
     template_name = 'blog/home.html'
 
