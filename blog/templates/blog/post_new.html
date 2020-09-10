@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
 {% load bootstrap %}
+{% load static %}
 
 {% block title %}Nova postagem{% endblock title %}
 
+{% block bannerurl %}{% static 'img/home-bg.jpg' %}{% endblock bannerurl %}
+
+{% block site-heading %}
+    <div class="site-heading">
+        <h1>Nova Postagem</h1>
+    </div>
+{% endblock site-heading %}
+
 {% block content %}
-    <h2 class="title mb-3">Nova postagem</h2>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|bootstrap }}

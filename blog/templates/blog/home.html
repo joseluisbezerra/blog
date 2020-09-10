@@ -1,8 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Home{% endblock title %}
 
+{% block bannerurl %}{% static 'img/home-bg.jpg' %}{% endblock bannerurl %}
+
+{% block site-heading %}
+    <div class="site-heading">
+        <h1>Clean Blog</h1>
+        <span class="subheading">A Blog Theme by Start Bootstrap</span>
+    </div>
+{% endblock site-heading %}
+
+
 {% block content %}
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <li style="list-style: none;" {% if message.tags %}class='alert alert-{{ message.tags }}'{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     {% for post in object_list %}
         <div class="post-preview">
             <a href="{{ post.get_absolute_url }}">
@@ -13,7 +32,7 @@
                     {{ post.conteudo|safe|truncatechars:"200" }}
                 </h6>
             </a>
-            <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on August 24, 2019</p>
+            <p class="post-meta">Postado por <strong style="color: black;">{{ post.autor.first_name }} {{ post.autor.last_name }}</strong> em {{ post.publicado }}</p>
         </div>
         <hr>
     {% endfor %}

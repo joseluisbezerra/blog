@@ -2,6 +2,15 @@
 
 {% block title %}Deletar postagem{% endblock title %}
 
+{% block bannerurl %}{{ post.imagem.url }}{% endblock bannerurl %}
+
+{% block post-heading %}
+    <div class="post-heading">
+        <h1>{{ post.titulo }}</h1>
+        <span class="meta">Postado por <strong>{{ post.autor.first_name }} {{ post.autor.last_name }}</strong> em {{ post.publicado }}</span>
+    </div>
+{% endblock post-heading %}
+
 {% block content %}
     <h2 class="title mb-3">Deletar postagem</h2>
     <form action="" method="POST">

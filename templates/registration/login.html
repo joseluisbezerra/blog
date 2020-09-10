@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
 {% load bootstrap %}
+{% load static %}
 
 {% block title %}Login{% endblock title %}
 
-{% block content %}
-    <div class="col-lg-8 col-md-10 mx-auto">
-        <h2 class="title mb-3">Login do sistema</h2>
-        <form action="" method="POST">
-            {% csrf_token %}
-            {{ form|bootstrap }}
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+{% block bannerurl %}{% static 'img/home-bg.jpg' %}{% endblock bannerurl %}
+
+{% block site-heading %}
+    <div class="site-heading">
+        <h1>Entrar no blog</h1>
     </div>
+{% endblock site-heading %}
+
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
 {% endblock content %}

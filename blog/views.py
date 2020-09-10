@@ -4,6 +4,8 @@ from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
 
 from .models import Post
 from .forms import PostForm
@@ -17,7 +19,7 @@ class BlogDetailView(DetailView):
     template_name = 'blog/post_detail.html'
     context_object_name = 'post'
 
-class BlogCreateView(SuccessMessageMixin, CreateView):
+class BlogCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/post_new.html'
@@ -32,7 +34,7 @@ class BlogCreateView(SuccessMessageMixin, CreateView):
     def get_success_message(self, cleaned_data):
         return self.success_message % dict (cleaned_data, field=self.object.titulo)
 
-class BlogUpdateView(SuccessMessageMixin, UpdateView):
+class BlogUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/post_edit.html'
@@ -47,7 +49,7 @@ class BlogUpdateView(SuccessMessageMixin, UpdateView):
     def get_success_message(self, cleaned_data):
         return self.success_message % dict (cleaned_data, field=self.object.titulo)
 
-class BlogDeleteView(SuccessMessageMixin, DeleteView):
+class BlogDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Post
     template_name = 'blog/post_delete.html'
     success_url = reverse_lazy('home')
@@ -56,3 +58,6 @@ class BlogDeleteView(SuccessMessageMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super(BlogDeleteView,self).delete(request, *args, **kwargs)
+
+def sobre(request):
+    return render(request, 'blog/sobre.html', {})

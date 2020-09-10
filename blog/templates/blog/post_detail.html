@@ -2,14 +2,31 @@
 
 {% block title %}{{ post.titulo }}{% endblock title %}
 
+{% block bannerurl %}{{ post.imagem.url }}{% endblock bannerurl %}
+
+{% block post-heading %}
+    <div class="post-heading">
+        <h1>{{ post.titulo }}</h1>
+        <span class="meta">Postado por <strong>{{ post.autor.first_name }} {{ post.autor.last_name }}</strong> em {{ post.publicado }}</span>
+    </div>
+{% endblock post-heading %}
+
+
 {% block content %}
-    <div class="post-entry">
-        <h2 class="">{{ post.titulo }}</h2>
-        <p class="text-justify text-center">{{ post.conteudo|safe }}</p>
-    </div>
-    <div class="text-center">
-        <a href="{{ post.get_absolute_url_edit }}" class="btn btn-info mb-2">Editar postagem</a>
-        <a href="{{ post.get_absolute_url_delete }}" class="btn btn-danger mb-2">Deletar postagem</a>
-    </div>
-        
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <li style="list-style: none;" {% if message.tags %}class='alert alert-{{ message.tags }}'{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <p class="text-justify text-center">{{ post.conteudo|safe }}</p>
+
+    {% if user.is_authenticated %}
+        <div class="text-center">
+            <a href="{{ post.get_absolute_url_edit }}" class="btn btn-primary mb-2">Editar postagem</a>
+            <a href="{{ post.get_absolute_url_delete }}" class="btn btn-danger mb-2">Deletar postagem</a>
+        </div>
+    {% endif %}    
 {% endblock content %}

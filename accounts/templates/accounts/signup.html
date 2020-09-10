@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
 
 {% block title %}Cadastro{% endblock title %}
+
+{% block bannerurl %}{% static 'img/home-bg.jpg' %}{% endblock bannerurl %}
+
+{% block site-heading %}
+    <div class="site-heading">
+        <h1>Cadastro de novo usuário</h1>
+    </div>
+{% endblock site-heading %}
 
 {% block content %}
     <form method="post" action=".">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Cadastre-se" />
+        {{ form|bootstrap }}
+        <input type="submit" value="Cadastre-se" class="btn btn-primary"/>
     </form>
 {% endblock %}
