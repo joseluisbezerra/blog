@@ -35,10 +35,10 @@ class Post(models.Model):
     slug = models.SlugField(max_length=250)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    categoria = models.ManyToManyField(Category, related_name='get_posts')
+    categoria = models.ManyToManyField(Category, related_name='get_posts', verbose_name='Categorias')
     imagem = models.ImageField(upload_to='blog', blank=True, null=True)
     conteudo = RichTextField(verbose_name='Conteúdo')
-    publicado = models.DateTimeField(default=timezone.now)
+    publicado = models.DateTimeField(default=timezone.now, verbose_name='Data de publicação')
     criado = models.DateTimeField(auto_now_add=True)
     alterado = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS, default='rascunho')

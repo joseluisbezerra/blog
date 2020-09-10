@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrapform',
     'ckeditor',
+    'django_filters',
     'blog',
     'accounts',
 ]
@@ -118,7 +119,7 @@ USE_L10N = True
 USE_TZ = True
 
 # Url que será redirecionado quando fazer login
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'management'
 
 # Url que será redirecionado quando fazer logout
 LOGOUT_REDIRECT_URL = 'login'

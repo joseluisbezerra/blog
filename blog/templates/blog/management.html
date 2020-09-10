@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 {% load static %}
 
 {% block title %}Gestão{% endblock title %}
@@ -7,7 +8,7 @@
 
 {% block site-heading %}
     <div class="site-heading">
-        <h1>Gerenciamento das postagens</h1>
+        <h1>Gerência das postagens</h1>
     </div>
 {% endblock site-heading %}
 
@@ -20,6 +21,19 @@
             {% endfor %}
         </div>
     {% endif %}
+
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="card card-body">
+                <h3>Filtro de pesquisa</h3>
+                <form action="" method="get">
+                    {{ filtro.form|bootstrap }}
+                    <button class="btn btn-primary btn-sm" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </div>
     
 
     <table class="table table-responsive">
@@ -34,7 +48,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for post in object_list %}
+            {% for post in filtro.qs %}
                 <tr>
                     <td scope="row">{{ post.titulo }}</td>
                     <td>{{ post.autor }}</td>

@@ -9,17 +9,27 @@ from django.shortcuts import render
 
 from .models import Post
 from .forms import PostForm
+from .filters import ManagementFilter, HomeFilter
 
 class Management(LoginRequiredMixin, ListView):
-    paginate_by = 8
     model = Post
     template_name = 'blog/management.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filtro'] = ManagementFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+    
+
 class BlogListView(ListView):
-    paginate_by = 4
     model = Post
     queryset = Post.objects.filter(status='publicado')
     template_name = 'blog/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filtro'] = HomeFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 class BlogDetailView(DetailView):
     model = Post

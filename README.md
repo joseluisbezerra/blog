@@ -3,10 +3,11 @@ Aplicação web de um blog feito com o framework Django
 
 # Dependências
 - python - Versão 3.5+
-- Django==2.1.5
+- Django==3.1.1
 - django-bootstrap-form==3.4
 - Pillow==7.2.0
 - django-ckeditor==6.0.0
+- django-filter==2.3.0
 
 # Instalação
 1. Crie um ambiente virtual:
