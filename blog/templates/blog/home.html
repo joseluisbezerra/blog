@@ -26,7 +26,7 @@
     <div class="row mb-3">
         <div class="col">
             <div class="card card-body">
-                <h3>Filtro de pesquisa</h3>
+                <h3>Filtros de pesquisa</h3>
                 <form action="" method="get">
                     {{ filtro.form|bootstrap }}
                     <button class="btn btn-primary btn-sm btn-block" type="submit">Buscar</button>
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    {% for post in filtro.qs %}
+    {% for post in object_list %}
         <div class="post-preview">
             <a href="{{ post.get_absolute_url }}">
                 <h2 class="post-title">

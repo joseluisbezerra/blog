@@ -26,7 +26,7 @@
     <div class="row mb-3">
         <div class="col">
             <div class="card card-body">
-                <h3>Filtro de pesquisa</h3>
+                <h3>Filtros de pesquisa</h3>
                 <form action="" method="get">
                     {{ filtro.form|bootstrap }}
                     <button class="btn btn-primary btn-sm" type="submit">Buscar</button>
@@ -48,7 +48,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for post in filtro.qs %}
+            {% for post in object_list %}
                 <tr>
                     <td scope="row">{{ post.titulo }}</td>
                     <td>{{ post.autor }}</td>

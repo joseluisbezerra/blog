@@ -10,8 +10,11 @@ from django.shortcuts import render
 from .models import Post
 from .forms import PostForm
 from .filters import ManagementFilter, HomeFilter
+from django_filters.views import FilterView
 
-class Management(LoginRequiredMixin, ListView):
+class Management(LoginRequiredMixin, FilterView):
+    filterset_class = ManagementFilter
+    paginate_by = 10
     model = Post
     template_name = 'blog/management.html'
 
@@ -21,7 +24,9 @@ class Management(LoginRequiredMixin, ListView):
         return context
     
 
-class BlogListView(ListView):
+class BlogListView(FilterView):
+    filterset_class = HomeFilter
+    paginate_by = 3
     model = Post
     queryset = Post.objects.filter(status='publicado')
     template_name = 'blog/home.html'
