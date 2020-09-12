@@ -23,8 +23,10 @@
 
     <p class="text-justify text-center">{{ post.conteudo|safe }}</p>
 
+    <span><h6>Categoria(s): </h6>{% for categoria in post.categoria.all %}<a href="/?titulo=&categoria={{ categoria.id }}" class="btn-sm btn-info">{{ categoria }}</a> {% endfor %}</span>
+
     {% if user.is_authenticated %}
-        <div class="text-center">
+        <div class="text-center mt-4">
             <a href="{{ post.get_absolute_url_edit }}" class="btn btn-primary mb-2">Editar postagem</a>
             <a href="{{ post.get_absolute_url_delete }}" class="btn btn-danger mb-2">Deletar postagem</a>
         </div>

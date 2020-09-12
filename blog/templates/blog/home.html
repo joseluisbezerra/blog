@@ -34,25 +34,28 @@
             </div>
         </div>
     </div>
-
-    {% for post in object_list %}
-        <div class="post-preview">
-            <a href="{{ post.get_absolute_url }}">
-                <h2 class="post-title">
-                    {{ post.titulo }}
-                </h2>
-                <h6 class="post-subtitle">
-                    {{ post.conteudo|safe|truncatechars:"200" }}
-                </h6>
-            </a>
-            <p class="post-meta">Postado por <strong style="color: black;">{{ post.autor.first_name }} {{ post.autor.last_name }}</strong> em {{ post.publicado }}</p>
-        </div>
-        <hr>
-    {% endfor %}
-
+    {% if object_list %}
+        {% for post in object_list %}
+            <div class="post-preview">
+                <a href="{{ post.get_absolute_url }}">
+                    <h2 class="post-title">
+                        {{ post.titulo }}
+                    </h2>
+                    <h6 class="post-subtitle">
+                        {{ post.conteudo|safe|truncatechars:"200" }}
+                    </h6>
+                </a>
+                <p class="post-meta">Postado por <strong style="color: black;">{{ post.autor.first_name }} {{ post.autor.last_name }}</strong> em {{ post.publicado }}</p>
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <br>
+        <h1 class="post-title text-center ">Não há postagens!</h1>
+    {% endif %}
     <!-- Pager -->
     {% if is_paginated %}
-    <div class="clearfix">
+    <div class="clearfix mt-4">
         <div class="row text-center">
             <div class="col-sm">
                 {% if page_obj.has_previous %}

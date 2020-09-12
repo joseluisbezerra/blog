@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 
-from .models import Post
+from .models import Post, Category
 from .forms import PostForm
 from .filters import ManagementFilter, HomeFilter
 from django_filters.views import FilterView
@@ -24,7 +24,7 @@ class Management(LoginRequiredMixin, FilterView):
         return context
     
 
-class BlogListView(FilterView):
+class PostListView(FilterView):
     filterset_class = HomeFilter
     paginate_by = 3
     model = Post
@@ -36,12 +36,12 @@ class BlogListView(FilterView):
         context['filtro'] = HomeFilter(self.request.GET, queryset=self.get_queryset())
         return context
 
-class BlogDetailView(DetailView):
+class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
     context_object_name = 'post'
 
-class BlogCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class PostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/post_new.html'
@@ -56,7 +56,7 @@ class BlogCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     def get_success_message(self, cleaned_data):
         return self.success_message % dict (cleaned_data, field=self.object.titulo)
 
-class BlogUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/post_edit.html'
@@ -71,7 +71,7 @@ class BlogUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def get_success_message(self, cleaned_data):
         return self.success_message % dict (cleaned_data, field=self.object.titulo)
 
-class BlogDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class PostDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Post
     template_name = 'blog/post_delete.html'
     success_url = reverse_lazy('home')
@@ -81,5 +81,7 @@ class BlogDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         messages.success(self.request, self.success_message)
         return super(BlogDeleteView,self).delete(request, *args, **kwargs)
 
+
+# View de sobre
 def about(request):
     return render(request, 'blog/about.html', {})

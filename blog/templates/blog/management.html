@@ -29,40 +29,44 @@
                 <h3>Filtros de pesquisa</h3>
                 <form action="" method="get">
                     {{ filtro.form|bootstrap }}
-                    <button class="btn btn-primary btn-sm" type="submit">Buscar</button>
+                    <button class="btn btn-primary btn-block" type="submit">Buscar</button>
                 </form>
             </div>
         </div>
     </div>
     
-
-    <table class="table table-responsive">
-        <thead class="thead-dark">
-            <tr>
-              <th scope="col">Titulo</th>
-              <th scope="col">Autor</th>
-              <th scope="col">Publicado</th>
-              <th scope="col">Status</th>
-              <th scope="col">Atualizar</th>
-              <th scope="col">Deletar</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for post in object_list %}
+    {% if object_list %}
+        <table class="table table-responsive">
+            <thead class="thead-dark">
                 <tr>
-                    <td scope="row">{{ post.titulo }}</td>
-                    <td>{{ post.autor }}</td>
-                    <td>{{ post.publicado }}</td>
-                    <td>{{ post.status }}</td>
-                    <td><a href="{{ post.get_absolute_url_edit }}" class="btn btn-primary btn-sm">Atualizar</a></td>
-                    <td><a href="{{ post.get_absolute_url_delete }}" class="btn btn-danger btn-sm">Deletar</a></td>
+                <th scope="col">Titulo</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Publicado</th>
+                <th scope="col">Status</th>
+                <th scope="col">Atualizar</th>
+                <th scope="col">Deletar</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for post in object_list %}
+                    <tr>
+                        <td scope="row">{{ post.titulo }}</td>
+                        <td>{{ post.autor }}</td>
+                        <td>{{ post.publicado }}</td>
+                        <td>{{ post.status }}</td>
+                        <td><a href="{{ post.get_absolute_url_edit }}" class="btn-sm btn-primary">Atualizar</a></td>
+                        <td><a href="{{ post.get_absolute_url_delete }}" class="btn-sm btn-danger">Deletar</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <br>
+        <h1 class="post-title text-center ">Não há postagens!</h1>
+    {% endif %}
 
     <!-- Pager -->
-    {% if page_obj.paginator.num_pages %}
+    {% if is_paginated %}
     <div class="clearfix">
         <div class="row text-center">
             <div class="col-sm">
