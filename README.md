@@ -8,6 +8,7 @@ Aplicação web de um blog feito com o framework Django
 - Pillow==7.2.0
 - django-ckeditor==6.0.0
 - django-filter==2.3.0
+- python-decouple==3.3
 
 # Instalação
 1. Crie um ambiente virtual:
@@ -19,15 +20,19 @@ python3 -m venv myvenv
 ```
 (myvenv) pip install -r requirements.txt
 ```
-4. Sincronize a base de dados:
+4. Em seguida você vai precisar criar um arquivo .env:
+```
+(myvenv) python contrib/env_gen.py
+```
+5. Sincronize a base de dados:
 ```
 (myvenv) python manage.py migrate
 ```
-5. Crie um usuário (Administrador do sistema):
+6. Crie um super usuário (Administrador do sistema):
 ```
 (myvenv) python manage.py createsuperuser
 ```
-6. Teste a instalação carregando o servidor de desenvolvimento (http://localhost:8000 no navegador):
+7. Teste a instalação carregando o servidor de desenvolvimento (http://localhost:8000 no navegador):
 ```
 (myvenv) python manage.py runserver
 ```
