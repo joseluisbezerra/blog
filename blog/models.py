@@ -7,10 +7,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from ckeditor.fields import RichTextField
 
-class PublishedManager(models.Manager):
-    def get_queryset(self):
-        return super(PublishedManager, self).get_queryset().filter(status='publicado')
-
+def imagem_directory_path(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (slugify(instance.titulo), ext)
+    # file will be uploaded to MEDIA_ROOT/blog/<slug>/<filename>
+    return 'blog/{}/{}'.format(slugify(instance.titulo), filename)
 
 class Category(models.Model):
     nome = models.CharField(max_length=100)
@@ -36,15 +37,12 @@ class Post(models.Model):
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
 
     categoria = models.ManyToManyField(Category, related_name='get_posts', verbose_name='Categorias')
-    imagem = models.ImageField(upload_to='blog', blank=True, null=True)
+    imagem = models.ImageField(upload_to=imagem_directory_path, blank=True, null=True)
     conteudo = RichTextField(verbose_name='Conteúdo')
     publicado = models.DateTimeField(default=timezone.now, verbose_name='Data de publicação')
     criado = models.DateTimeField(auto_now_add=True)
     alterado = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS, default='rascunho')
-
-    objects = models.Manager()
-    published = PublishedManager()
 
     class Meta:
         ordering = ('-publicado',)
