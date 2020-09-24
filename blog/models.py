@@ -11,7 +11,7 @@ def imagem_directory_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (slugify(instance.titulo), ext)
     # file will be uploaded to MEDIA_ROOT/blog/<slug>/<filename>
-    return 'blog/{}/{}'.format(slugify(instance.titulo), filename)
+    return 'blog/{}'.format(filename)
 
 class Category(models.Model):
     nome = models.CharField(max_length=100)
@@ -58,6 +58,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+    def delete(self, *args, **kwargs):
+        self.imagem.delete()
+        super().delete(*args, **kwargs)
 
 
 @receiver(post_save, sender=Post)

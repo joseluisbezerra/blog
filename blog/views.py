@@ -75,11 +75,6 @@ class PostDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Post
     template_name = 'blog/post_delete.html'
     success_url = reverse_lazy('home')
-    success_message = "Deletado com sucesso"
-
-    def delete(self, request, *args, **kwargs):
-        messages.success(self.request, self.success_message)
-        return super(BlogDeleteView,self).delete(request, *args, **kwargs)
 
 
 # View de sobre
