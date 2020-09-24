@@ -74,7 +74,7 @@ class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 class PostDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Post
     template_name = 'blog/post_delete.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('management')
 
 
 # View de sobre

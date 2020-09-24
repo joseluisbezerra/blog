@@ -1,6 +1,18 @@
 # blog
 Aplicação web de um blog feito com o framework Django
 
+# Funcionalidades
+- Sistema de autenticação
+- CRUD
+- Área de gerenciamento das postagens
+- Postagens organizadas por categorias
+- Upload de imagens para os banners das postagens
+- Filtros para as postagens
+- Templates responsivas feita com Bootstrap
+- Envio de e-mails na página de contato
+- Paginação
+- Mensagens
+
 # Dependências
 - python - Versão 3.5+
 - Django==3.1.1
