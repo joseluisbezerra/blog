@@ -8,7 +8,7 @@ Aplicação web de um blog feito com o framework Django
 - Postagens organizadas por categorias
 - Upload de imagens para os banners das postagens
 - Filtros para as postagens
-- Templates responsivas feita com Bootstrap
+- Templates responsivas feitas com Bootstrap
 - Envio de e-mails na página de contato
 - Paginação
 - Mensagens
