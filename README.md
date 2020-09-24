@@ -1,7 +1,7 @@
 # blog
 Aplicação web de um blog feito com o framework Django
 
-# Funcionalidades
+# O que há no projeto
 - Sistema de autenticação
 - CRUD
 - Área de gerenciamento das postagens
