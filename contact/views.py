@@ -3,17 +3,16 @@ from django.core.mail import send_mail
 
 from .forms import ContactForm
 
+
 def contact(request):
     send = False
     form = ContactForm(request.POST or None)
-    
+
     if form.is_valid():
         # Enviar email
         nome = request.POST.get('nome', '')
         from_email = request.POST.get('from_email', '')
         mensagem = request.POST.get('mensagem', '')
-
-        
 
         try:
             send_mail(
@@ -23,10 +22,9 @@ def contact(request):
                 ['luisbezerra.work@gmail.com'],
             )
             send = True
-        except:
+        except Exception:
             send = False
 
-    
     context = {
         'form': form,
         'success': send,

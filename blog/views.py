@@ -1,16 +1,15 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
 
-from .models import Post, Category
+from .models import Post
 from .forms import PostForm
 from .filters import ManagementFilter, HomeFilter
 from django_filters.views import FilterView
+
 
 class Management(LoginRequiredMixin, FilterView):
     filterset_class = ManagementFilter
@@ -20,9 +19,10 @@ class Management(LoginRequiredMixin, FilterView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filtro'] = ManagementFilter(self.request.GET, queryset=self.get_queryset())
+        context['filtro'] = ManagementFilter(
+            self.request.GET, queryset=self.get_queryset())
         return context
-    
+
 
 class PostListView(FilterView):
     filterset_class = HomeFilter
@@ -33,13 +33,16 @@ class PostListView(FilterView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filtro'] = HomeFilter(self.request.GET, queryset=self.get_queryset())
+        context['filtro'] = HomeFilter(
+            self.request.GET, queryset=self.get_queryset())
         return context
+
 
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
     context_object_name = 'post'
+
 
 class PostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Post
@@ -54,7 +57,8 @@ class PostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_message(self, cleaned_data):
-        return self.success_message % dict (cleaned_data, field=self.object.titulo)
+        return self.success_message % dict(cleaned_data, field=self.object.titulo)
+
 
 class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Post
@@ -69,7 +73,8 @@ class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return super().form_valid(form)
 
     def get_success_message(self, cleaned_data):
-        return self.success_message % dict (cleaned_data, field=self.object.titulo)
+        return self.success_message % dict(cleaned_data, field=self.object.titulo)
+
 
 class PostDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Post
